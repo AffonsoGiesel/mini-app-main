@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Relatório de Tasks</h1>
+
+<table>
+  <thead>
+  <!-- Table para mostrar Tasks -->
+  <div class="col-md-6 col-sm-6  ">
+
+
+    <div class="x_content">
+      <div class="table table-hover">
+  <thead>
+
+  <tr>
+    <th>Tasks(id)</th>
+    <th>Comments</th>
+    <th>Status</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <% @task.each do |task| %>
+    <tr>
+      <td><%= task.id %></td>
+      <td>
+      <% task.comments.sort{ |a,b| a[:body] <=> b[:body] }.each do |comment| %>
+        <%= comment.body %>
+          <br>
+      <% end %>
+      <td>
+
+      <td><%= task.status %></td>
+    </tr>
+  <% end %>
+  </tbody>
+  </div>
+</table>
+</table>

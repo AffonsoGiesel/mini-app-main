@@ -12,4 +12,6 @@ Rails.application.routes.draw do
 
   resources :pluses, only: %i[create destroy]
   resources :minuses, only: %i[create destroy]
+
+  resources :relatorio_tasks
 end
