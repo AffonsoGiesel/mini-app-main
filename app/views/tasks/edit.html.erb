@@ -1,0 +1,45 @@
+<% @task.errors.full_messages.each do |error| %>
+  <p><%= error %> </p>
+<% end %>
+
+<p> Edit <%= @task.title %> Task </p>
+<%= form_for @task do |f| %>
+
+  <div>
+    <%= f.label :title, 'Task Title:'%>
+    <%= f.text_field :title, class: 'form-control mb-5', rows: '5'%>
+  </div>
+
+  <div>
+    <%= f.label :description, 'Task Description:'%>
+    <%= f.text_area :description, class: 'form-control mb-5', rows: '5'%>
+  </div>
+
+  <br>
+
+  <div>
+    <%= f.label :status, 'Task Status' %>
+    <%= f.select :status, ['incomplete', 'complete'] , class: 'form-control mb-5'%>
+  </div>
+
+  <br>
+
+  <div>
+    <%= f.label :priority, 'Task Priority' %>
+    <%= f.select :priority, ['Low', 'Medium', 'High'] , class: 'form-control mb-2'%>
+  </div>
+
+  <br>
+
+  <div>
+    <%= f.label :share, 'Change Privacy:' %>
+    <%= f.select :share, [['Public', true], ['Private', false]], class: 'form-control mb-2' %>
+  </div>
+
+  <br>
+
+  <div>
+    <%= f.submit class: 'btn btn-primary col-5'%>
+    <%= link_to 'Go Back', :back, class: 'btn btn-secondary col-5' %>
+  </div>
+<% end %>

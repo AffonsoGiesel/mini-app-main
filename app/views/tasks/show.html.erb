@@ -1,0 +1,51 @@
+<div class='container border'>
+
+  <div class='row'>
+    <p class='col-5 text-center text-wrap text-break'  align='center' style=':white-space' >
+      <strong>Title</strong>:
+      <br>
+      <%= @task.title %>
+    </p>
+    <p class='col-5 text-center text-wrap text-break'  align='center' style=':white-space' >
+      <strong>Description</strong>:
+      <br>
+      <%= @task.description %>
+    </p>
+    <p class='col-5 text-center text-wrap text-break'  align='center' style=':white-space' >
+      <strong>Status</strong>:
+      <br>
+      <%= @task.status %>
+    </p>
+    <p class='col-5 text-center text-wrap text-break'  align='center' style=':white-space' >
+      <strong>Priority</strong>:
+      <br>
+      <%= @task.priority %>
+    </p>
+    <p class='col-5 text-center text-wrap text-break'  align='center' style=':white-space' >
+<!--      <strong>Share</strong>:-->
+<!--      <br>-->
+      <%#= @task.share %>
+<!--    </p>-->
+    <%= form_for @task do |f| %>
+      <%= f.label :share, 'Change Privacy:' %>
+      <%= f.select :share, [['Public', true], ['Private', false]], class: 'form-control mb-2' %>
+      <%= f.submit 'Change Setting', class: 'btn btn-primary col-5'%>
+    <% end %>
+    </p>
+  </div>
+<br>
+
+
+  <div class='row'>
+    <p class='col-4'></p>
+    <% if current_user == @task.user %>
+      <%= link_to 'Edit Task', edit_task_path(@task), class: 'text-white btn btn-primary col-2'%>
+    <% end %>
+    <%= link_to 'Go Back', tasks_path(@task), class: 'btn btn-secondary col-2' %>
+  </div>
+  <br>
+  <br>
+  <br>
+</div>
+
+

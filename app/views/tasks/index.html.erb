@@ -1,0 +1,86 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tasks</h1>
+
+<table>
+  <thead>
+  <!-- Table para mostrar Tasks -->
+  <div class="col-md-6 col-sm-6  ">
+
+
+    <div class="x_content">
+      <div class="table table-hover">
+  <thead>
+
+  <tr>
+    <td><%= link_to "Highest Priority", tasks_path(order: 'highest priority') %></td>
+    <td><%= link_to "Lowest Priority", tasks_path(order: 'lowest priority') %></td>
+    <td><%= link_to "Newest", tasks_path(order: 'newest') %></td>
+    <td><%= link_to "Oldest", tasks_path(order: 'oldest') %></td>
+    <td><%= link_to "Complete First", tasks_path(order: 'complete first') %></td>
+    <td><%= link_to "Incomplete First", tasks_path(order: 'incomplete first') %></td>
+    <td><%= link_to "Title(asc)", tasks_path(order: 'title asc') %></td>
+    <td><%= link_to "Title(des)", tasks_path(order: 'title desc') %></td>
+  </tr>
+
+
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Status</th>
+    <th>Priority</th>
+    <th>Share</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <% @task.each do |task| %>
+    <tr>
+      <td><h3><%= link_to task.title, task_path(task.id) %></h3></td>
+      <td><%= task.description %></td>
+      <td><%= task.status %></td>
+      <td><%= task.priority %></td>
+      <td><%= task.share %></td>
+
+
+      <!-- Botão de Visualizar -->
+
+      <td><%= link_to task_path(task.id), class: "btn btn-success btn-circle" do %>
+          <i class="fa fa-eye"></i>
+        <% end %>
+      </td>
+
+      <!-- Botão de Editar -->
+
+      <td><%= link_to edit_task_path(task.id), class: "btn btn-primary btn-circle" do %>
+          <i class="fa fa-edit"></i>
+        <% end %>
+      </td>
+
+      <!-- Botão de Apagar -->
+
+      <td><%= link_to task, method: :delete, id: 'botao_apagar', class: "btn btn-danger btn-circle" do %>
+          <i class="fa fa-trash"></i>
+        <% end %>
+      </td>
+
+    </tr>
+  <% end %>
+  </tbody>
+  </div>
+</table>
+</table>
+
+<script>
+    $(".sort_btn").on('click',function(){
+        if (url.indexOf('?') > -1){
+            url += "&sort=sort";
+        }else{
+            url += "?sort=sort";
+        }
+    }
+
+    window.location.href = url;
+
+    });
+</script>
