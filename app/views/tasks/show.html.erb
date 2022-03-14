@@ -1,45 +1,64 @@
 <div class='container border'>
 
+  <td><%= link_to 'Biggest Score', controller: "tasks", action: "show", id: @task %></td>
+<td><%= link_to 'Lowest Score', controller: "tasks", action: "show", id: @task %></td>
+
   <div class='row'>
-    <p class='col-5 text-center text-wrap text-break'  align='center' style=':white-space' >
+    <p class='col-5 text-center text-wrap text-break' align='center' style=':white-space'>
       <strong>Title</strong>:
       <br>
       <%= @task.title %>
     </p>
-    <p class='col-5 text-center text-wrap text-break'  align='center' style=':white-space' >
+    <p class='col-5 text-center text-wrap text-break' align='center' style=':white-space'>
       <strong>Description</strong>:
       <br>
       <%= @task.description %>
     </p>
-    <p class='col-5 text-center text-wrap text-break'  align='center' style=':white-space' >
+    <p class='col-5 text-center text-wrap text-break' align='center' style=':white-space'>
       <strong>Status</strong>:
       <br>
       <%= @task.status %>
     </p>
-    <p class='col-5 text-center text-wrap text-break'  align='center' style=':white-space' >
+    <p class='col-5 text-center text-wrap text-break' align='center' style=':white-space'>
       <strong>Priority</strong>:
       <br>
       <%= @task.priority %>
     </p>
-    <p class='col-5 text-center text-wrap text-break'  align='center' style=':white-space' >
-<!--      <strong>Share</strong>:-->
-<!--      <br>-->
-      <%#= @task.share %>
-<!--    </p>-->
-    <%= form_for @task do |f| %>
-      <%= f.label :share, 'Change Privacy:' %>
-      <%= f.select :share, [['Public', true], ['Private', false]], class: 'form-control mb-2' %>
-      <%= f.submit 'Change Setting', class: 'btn btn-primary col-5'%>
-    <% end %>
+
+    <p class='col-5 text-center text-wrap text-break' align='center' style=':white-space'>
+      <% @task.comments.sort{ |a,b| a[:body] <=> b[:body] }.each do |comment| %>
+        <%= comment.body %>
+        <br>
+<!--        Tentativas de fazer os pluses e minuses funcionarem-->
+        <%#= comment.pluses.size %><%#= link_to 'Plus',controller: "tasks", action: "show", :plus => "plus", :comment => comment.id, id: @task %>
+        <%#= comment.minuses.size %><%#= link_to 'Minus',controller: "tasks", action: "show", :minus => "minus", :comment => comment.id, id: @task %>
+
+        <%#= comment.pluses.size %><%#= link_to 'Plus',controller: "pluses", action: "create" %>
+        <%#= comment.minuses.size %><%#= link_to 'Minus',controller: "minuses", action: "create" %>
+
+      <% end %>
     </p>
+
+
   </div>
-<br>
+  <table>
+    <tr>
+      <td>
+        <%= form_for @task do |f| %>
+          <%= f.label :share, 'Change Privacy:' %>
+          <%= f.select :share, [['Public', true], ['Private', false]], class: 'form-control mb-2' %>
+            <%= f.submit 'Change Setting', class: 'btn btn-primary' %>
+        <% end %>
+        </td>
+        </tr>
+  </table>
+  <br>
 
 
   <div class='row'>
     <p class='col-4'></p>
     <% if current_user == @task.user %>
-      <%= link_to 'Edit Task', edit_task_path(@task), class: 'text-white btn btn-primary col-2'%>
+      <%= link_to 'Edit Task', edit_task_path(@task), class: 'text-white btn btn-primary col-2' %>
     <% end %>
     <%= link_to 'Go Back', tasks_path(@task), class: 'btn btn-secondary col-2' %>
   </div>

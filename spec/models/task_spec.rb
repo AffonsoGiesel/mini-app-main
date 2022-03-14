@@ -29,7 +29,7 @@ RSpec.describe Task, type: :model do
   it{ should have_many(:comments).class_name(Comment)}
 
   it { should define_enum_for(:status).with_values(incomplete: 0, complete: 10) }
-  it { should define_enum_for(:priority).with_values(low: 0, medium: 10, high: 20) }
+  it { should define_enum_for(:priority).with_values(Low: 0, Medium: 10, High: 20) }
 
 
   end

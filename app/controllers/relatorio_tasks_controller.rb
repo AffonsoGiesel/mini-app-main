@@ -4,7 +4,7 @@ class RelatorioTasksController < ApplicationController
   skip_before_action :verify_authenticity_token, only: %i[search]
 
   def index
-    @task = Task.where(user_id: [current_user.id])
+    @task = Task.all
   end
 
   private

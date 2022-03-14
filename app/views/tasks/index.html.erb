@@ -7,7 +7,6 @@
   <!-- Table para mostrar Tasks -->
   <div class="col-md-6 col-sm-6  ">
 
-
     <div class="x_content">
       <div class="table table-hover">
   <thead>
@@ -21,8 +20,9 @@
     <td><%= link_to "Incomplete First", tasks_path(order: 'incomplete first') %></td>
     <td><%= link_to "Title(asc)", tasks_path(order: 'title asc') %></td>
     <td><%= link_to "Title(des)", tasks_path(order: 'title desc') %></td>
+    <!--    <td><%#= link_to 'Biggest Score', tasks_path(order: 'biggest score') %></td>-->
+    <!--    <td><%#= link_to 'Lowest Score', tasks_path(order: 'lowest score') %></td>-->
   </tr>
-
 
   <tr>
     <th>Title</th>
@@ -30,6 +30,7 @@
     <th>Status</th>
     <th>Priority</th>
     <th>Share</th>
+    <th>Comments</th>
   </tr>
   </thead>
   <tbody>
@@ -41,7 +42,15 @@
       <td><%= task.status %></td>
       <td><%= task.priority %></td>
       <td><%= task.share %></td>
-
+      <td>
+        <% task.comments.sort { |a, b| a[:body] <=> b[:body] }.each do |comment| %>
+          <%= comment.body %>
+          <br>
+          <i class="fa fa-solid fa-thumbs-up"></i><%= comment.pluses.size %>
+          <i class="fa fa-solid fa-thumbs-down"></i><%= comment.minuses.size %>
+          <br>
+        <% end %>
+      </td>
 
       <!-- Botão de Visualizar -->
 
@@ -72,15 +81,16 @@
 </table>
 
 <script>
-    $(".sort_btn").on('click',function(){
-        if (url.indexOf('?') > -1){
+    $(".sort_btn").on('click', function () {
+        if (url.indexOf('?') > -1) {
             url += "&sort=sort";
-        }else{
+        } else {
             url += "?sort=sort";
         }
     }
 
     window.location.href = url;
 
-    });
+    })
+    ;
 </script>
