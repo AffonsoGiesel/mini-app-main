@@ -27,6 +27,13 @@
     </thead>
     <tbody>
 
+    <%= form_tag "/", method: "GET" do %>
+      <%=label_tag 'Search Tasks:' do %>
+      <%= text_field_tag 'Search Tasks:', params[:search_by_title] %>
+      <%= submit_tag("Search", :id=>"search-btn", :name=>"submit") %>
+    <% end %>
+    <% end %>
+
     <% @tasks.each do |task| %>
       <tr>
         <td><%= link_to task.title, task_path(task.id) %></td>
